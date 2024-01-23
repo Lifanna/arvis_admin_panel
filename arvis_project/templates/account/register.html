@@ -1,0 +1,44 @@
+{% extends 'main/index.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
+    <script src="/static/js/register.js"></script>
+
+    <div class="register_container">
+        <form method="POST" id="registerForm" action="/register">
+            {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Ошибка в форме:</strong>
+            <ul>
+            {% for field, errors in form.errors.items %}
+                <li>{{ field }}: {{ errors|join:", " }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% csrf_token %}
+            <div class="register_inputs_list">
+                <input class="register_input" type="text" name="first_name" placeholder="Имя">
+                <div id="first_name-error" class="error"></div>
+                <input class="register_input" type="text" name="last_name" placeholder="Фамилия">
+                <div id="last_name-error" class="error"></div>
+                <input class="register_input phone_number" type="text" name="phone_number" placeholder="Телефон">
+                <div id="phone_number-error" class="error"></div>
+                <input class="register_input" type="date" name="date_of_birth">
+                <div id="date_of_birth-error" class="error"></div>
+                <input class="register_input" type="email" name="email" placeholder="Email">
+                <div id="email-error" class="error"></div>
+                <input class="register_input" type="text" name="username" placeholder="Логин">
+                <div id="username-error" class="error"></div>
+                <input class="register_input" type="password" name="password1" placeholder="Пароль">
+                <input class="register_input" type="password" name="password2" placeholder="Пароль">
+                <div id="password-error" class="error"></div>
+                <input class="register_btn" type="submit" value="Зарегистрироваться">
+
+            </div>
+        </form>
+    </div>
+{% endblock %}

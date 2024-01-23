@@ -1,0 +1,30 @@
+{% extends 'main/index.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <form method="POST" id="loginForm" action="/account/login">
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Ошибка в форме:</strong>
+            <ul>
+            {% for field, errors in form.errors.items %}
+                <li>{{ field }}: {{ errors|join:", " }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% csrf_token %}
+        <div class="login_container">
+            <div class="login_content">
+                <div class="login_box">
+                    <input class="login_input" type="text" name="username" placeholder="Ваш логин">
+                    <input class="login_input" type="password" name="password" placeholder="Пароль">
+                </div>
+                <div class="login_button">
+                    <input class="login_register_btn" type="submit" value="Войти">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+@import './reset.css';
+
+:root{
+	--max-width:1450px;
+}
+
+body{
+	font-family: 'Poppins', sans-serif;
+	color: #000;
+}
+
+.container{
+	max-width: var(--max-width);
+	padding: 0 30px;
+	margin: 0 auto;/*отступы сверху снизу 0 влево вправо авто*/
+}
+
