@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'main',
     'account',
 ]
@@ -89,12 +90,11 @@ WSGI_APPLICATION = 'arvis_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
-        'NAME': "stobook",
+        'NAME': "arvis_db",
         'USER':env('DATABASE_USER'),
         'PASSWORD':env('DATABASE_PASS'),
         'HOST':env('DATABASE_HOST'),
         'PORT':env('DATABASE_PORT'),
-      
     }
 }
 
@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
@@ -153,11 +153,11 @@ MEDIA_URL='/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.mail.ru"
-EMAIL_PORT = 2525
-EMAIL_HOST_USER = "loginovmih86@mail.ru"
-EMAIL_HOST_PASSWORD = "VYSyph4xQwV6vnFyEyGm"
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 

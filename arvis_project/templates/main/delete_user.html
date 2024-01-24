@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="col-md-12 col-lg-12 justify-content-center">
+        {% for error in field.errors %}
+            <span class="help-block text-danger">{{ error }}</span>
+        {% endfor %}
+        <form method="post" class="form-signin">
+            {% csrf_token %}
+            <h3>Вы действительно хотите удалить данного пользователя?</h3>
+            {{ object.first_name }} {{ object.last_name }}
+            <br>
+            <br>
+            <button type="submit" class="btn btn-danger">Подтвердить удаление</button>
+        </form>
+    </div>
+{% endblock %}

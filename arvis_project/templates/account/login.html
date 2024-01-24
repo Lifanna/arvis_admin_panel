@@ -1,30 +1,22 @@
-{% extends 'main/index.html' %}
-{% load static %}
-
+{% extends "layout.html" %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="/static/css/login.css">
-    <form method="POST" id="loginForm" action="/account/login">
-        {% if form.errors %}
-        <div class="alert alert-danger">
-            <strong>Ошибка в форме:</strong>
-            <ul>
-            {% for field, errors in form.errors.items %}
-                <li>{{ field }}: {{ errors|join:", " }}</li>
-            {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    {% csrf_token %}
-        <div class="login_container">
-            <div class="login_content">
-                <div class="login_box">
-                    <input class="login_input" type="text" name="username" placeholder="Ваш логин">
-                    <input class="login_input" type="password" name="password" placeholder="Пароль">
-                </div>
-                <div class="login_button">
-                    <input class="login_register_btn" type="submit" value="Войти">
-                </div>
-            </div>
-        </div>
-    </form>
+    <div class="col-12 col-md-4 col-lg-4 offset-md-4 justify-content-center">
+        <form method="POST">
+            <h3 class="text-center mb-4">Вход в систему</h3>
+            {% csrf_token %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="text-danger">{{ error|escape }}</div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="text-danger">{{ error|escape }}</div>
+                {% endfor %}
+            {% endif %}
+            <input type="text" id="login" class="form-control mb-3" name="username" placeholder="Логин">
+            <input type="password" id="password" class="form-control mb-3" name="password" placeholder="Пароль">
+            <input type="submit" class="btn btn-primary btn-block" value="Войти">
+        </form>
+    </div>
 {% endblock %}
