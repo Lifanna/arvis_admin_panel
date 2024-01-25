@@ -15,3 +15,25 @@ body{
 	margin: 0 auto;/*отступы сверху снизу 0 влево вправо авто*/
 }
 
+.file-input-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-input-container label {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.file-input-container input[type="file"] {
+    position: absolute;
+    font-size: 100px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}

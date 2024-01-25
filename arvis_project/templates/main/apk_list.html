@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="col-md-12 col-lg-12 justify-content-center ">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">№</th>
+                <th scope="col">Файл</th>
+                <th scope="col">Дата добавления</th>
+                <th scope="col">Доступ</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for apk in apks %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td>{{ apk.apk_file }}</td>
+                      <td>{{ apk.created_at|date:"d-m-Y H:i:s" }}</td>
+                      <td>{{ apk_user }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

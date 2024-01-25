@@ -50,6 +50,8 @@ class CustomUser(AbstractBaseUser):
 
     phone_number = models.CharField("Телефон", max_length=255,null=True)
 
+    telegram_user_id = models.CharField("ID в телеграм", max_length=255, null=True)
+
     is_active = models.BooleanField(default=True,null=True)
 
     is_admin = models.BooleanField(default=False,null=True)

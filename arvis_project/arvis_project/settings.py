@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'rest_framework',
     'main',
     'account',
 ]
@@ -90,7 +91,7 @@ WSGI_APPLICATION = 'arvis_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
-        'NAME': "arvis_db",
+        'NAME': "arvis",
         'USER':env('DATABASE_USER'),
         'PASSWORD':env('DATABASE_PASS'),
         'HOST':env('DATABASE_HOST'),
@@ -136,6 +137,12 @@ USE_TZ = True
 AUTH_USER_MODEL = "account.CustomUser"
 LOGIN_URL = "/account/login"
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -145,7 +152,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static'),)
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
-
 
 
 # Default primary key field type

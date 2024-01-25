@@ -1,6 +1,64 @@
 {% extends "layout.html" %}
+
 {% block content %}
-    <div class="col-md-12 col-lg-12 justify-content-center">
-		asdafdsa
-    </div>
+
+<div class="col-md-12 col-lg-12 justify-content-center" style="display: flex; flex-direction: column; align-items: center; padding-top:100px">
+    {% if messages %}
+        <script>
+            showPopup();
+        </script>
+        {% for message in messages %}
+            <div id="popup-message" class="alert alert-success" style="width: 300px; position: fixed; top: 20px; right: 20px; z-index: 1000;">
+                <button type="button" class="close" onclick="hidePopup()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+	{% if request.user.is_authenticated %}
+		<form method="post" action="{% url 'upload_apk' %}" style="width: 300px;" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			{{ form.non_field_errors }}
+			
+			<div class="form-group">
+				<label for="{{ form.car.id_for_label }}">Выберите автомобиль</label>
+				{{ form.car }}
+				{{ form.car.errors }}
+			</div>
+
+			<div class="form-group">
+				<label for="{{ form.apk_file.id_for_label }}">APK</label>
+				<div class="file-input-container">
+					<input type="file" name="{{ form.apk_file.name }}" class="custom-file-input" id="{{ form.apk_file.id }}" style="display: none;" onchange="updateFileLabel(this)">
+					<label class="file-label" for="{{ form.apk_file.id }}">Выберите файл</label>
+					<span id="file-name">Файл не выбран</span>
+					{{ form.apk_file }}
+					{{ form.apk_file.errors }}
+				</div>
+			</div>
+
+			<input type="submit" value="Загрузить" class="btn btn-primary" style="width: 100%;">
+		</form>
+	{% endif %}
+
+    <script 'src=/static/js/popup.js' ></script>
+	<script>
+		{% if messages %}
+			showPopup();
+		{% endif %}
+	
+		function updateFileLabel(input) {
+			var fileNameLabel = document.getElementById('file-name');
+			if (input.files.length > 0) {
+				fileNameLabel.textContent = input.files[0].name;
+			} else {
+				fileNameLabel.textContent = 'Файл не выбран';
+			}
+		}
+	</script>
+</div>
+
 {% endblock %}
